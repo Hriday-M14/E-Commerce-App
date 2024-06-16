@@ -26,13 +26,16 @@ module.exports = {
         .trim()
         .isLength({ min: 4, max: 20 })
         .withMessage('Must be between 4 and 20 Characters'),
-    requirePasswordConfirmation: check('confirmPassword')
+    requirePasswordConfirmation: check('passwordConfirm')
         .trim()
         .isLength({ min: 4, max: 20 })
         .withMessage('Must be between 4 and 20 Characters')
         .custom((confirmPassword, { req }) => {
             if(confirmPassword !== req.body.password){
                 throw new Error('Password and Password Confirmation Input Fields Should Match.');
+            }
+            else{
+                return true;
             }
         }),
     requireEmailExists: check('email')
