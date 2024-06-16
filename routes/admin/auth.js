@@ -17,6 +17,11 @@ const router = express.Router();
 // that we set up. 
 
 router.get('/signup', (req, res) => {
+    if(req.session.userId)
+    {
+        res.send("You are Already Signed In. First Signout from Application and then continue to Sign Up .... ");
+        return;
+    }
     res.send(signupTemplate({req}));
 });
 
@@ -42,6 +47,11 @@ router.get('/signout', (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
+    if(req.session.userId)
+    {
+        res.send("You are Already Signed In. First Signout from Application and then continue to Sign In .... ");
+        return;
+    }
     res.send(signinTemplate({}));
 });
 
